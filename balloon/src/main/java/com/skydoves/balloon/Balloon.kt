@@ -351,7 +351,7 @@ class Balloon(
     with(this.bodyWindow) {
       isOutsideTouchable = true
       isFocusable = builder.isFocusable
-      setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+      setBackgroundDrawable(null)
       runOnAfterSDK21 {
         elevation = builder.elevation
       }

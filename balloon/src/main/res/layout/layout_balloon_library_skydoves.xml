@@ -16,6 +16,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/balloon"
+  android:clipChildren="false"
+  android:clipToPadding="false"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
@@ -23,6 +25,8 @@
     android:id="@+id/balloon_wrapper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     tools:ignore="UselessParent">
 
     <FrameLayout

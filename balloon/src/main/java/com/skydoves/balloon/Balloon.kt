@@ -26,7 +26,6 @@ import android.graphics.Color
 import android.graphics.Point
 import android.graphics.Rect
 import android.graphics.Typeface
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
 import android.os.Build
@@ -338,12 +337,6 @@ class Balloon(
         setColor(builder.backgroundColor)
         cornerRadius = builder.cornerRadius
       }
-      setPadding(
-        builder.paddingLeft,
-        builder.paddingTop,
-        builder.paddingRight,
-        builder.paddingBottom
-      )
     }
   }
 
@@ -389,6 +382,17 @@ class Balloon(
         ArrowOrientation.BOTTOM ->
           setPadding(elevation, paddingSize, elevation, paddingSize.coerceAtLeast(elevation))
       }
+    }
+    with(binding.balloonText) {
+      setPadding(
+        builder.paddingLeft,
+        builder.paddingTop,
+        builder.paddingRight,
+        builder.paddingBottom
+      )
+      builder.maxWidth?.let { maxWidth = it }
+      builder.minWidth?.let { minWidth = it }
+      setLineSpacing(builder.lineSpacingExtra, builder.lineSpacingMultiplier)
     }
   }
 
@@ -1075,6 +1079,22 @@ class Balloon(
     @set:JvmSynthetic
     var width: Int = BalloonSizeSpec.WRAP
 
+    @JvmField @Px
+    @set:JvmSynthetic
+    var minWidth: Int? = null
+
+    @JvmField @Px
+    @set:JvmSynthetic
+    var maxWidth: Int? = null
+
+    @JvmField
+    @set:JvmSynthetic
+    var lineSpacingExtra: Float = 0.0f
+
+    @JvmField
+    @set:JvmSynthetic
+    var lineSpacingMultiplier: Float = 1.0f
+
     @JvmField @FloatRange(from = 0.0, to = 1.0)
     @set:JvmSynthetic
     var widthRatio: Float = NO_Float_VALUE
@@ -1411,6 +1431,16 @@ class Balloon(
     /** sets the width size using a dimension resource. */
     fun setWidthResource(@DimenRes value: Int): Builder = apply {
       this.width = context.dimenPixel(value)
+    }
+
+    /** sets the width size using a dimension resource. */
+    fun setMinWidthResource(@DimenRes value: Int): Builder = apply {
+      this.minWidth = context.dimenPixel(value)
+    }
+
+    /** sets the width size using a dimension resource. */
+    fun setMaxWidthResource(@DimenRes value: Int): Builder = apply {
+      this.maxWidth = context.dimenPixel(value)
     }
 
     /** sets the width size by the display screen size ratio. */
